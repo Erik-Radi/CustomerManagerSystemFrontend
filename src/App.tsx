@@ -1,8 +1,19 @@
+import { lazy, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+const Welcome = lazy(() => import('./pages/Welome'));
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div className="text-red-500">
-      Basic react app
-    </div>
+    <Routes>
+      {
+        isLoggedIn
+          ? <Route path="/" element={<Welcome />} />
+          : <Route path="*" element={<Navigate to="/login" replace />} />
+      }
+    </Routes>
   );
 }
 
