@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { selectUsername } from './redux/access/accessSelectors';
+import { selectUsername } from './redux/refresh/refreshSelectors';
 import { useAppSelector } from './redux/hooks';
 
-const Welcome = lazy(() => import('./pages/Welome'));
+const Layout = lazy(() => import ('./components/shared/Layout'));
 
 function App() {
   const username = useAppSelector(selectUsername);
@@ -12,7 +12,7 @@ function App() {
     <Routes>
       {
         username
-          ? <Route path="/" element={<Welcome />} />
+          ? <Route path="/*" element={<Layout />} />
           : <Route path="*" element={<Navigate to="/login" replace />} />
       }
     </Routes>

@@ -6,10 +6,10 @@ import office from '../assets/img/login-office.jpeg';
 import officeDark from '../assets/img/login-office-dark.jpeg';
 import { LoginRequest } from '../types/Login/LoginRequest';
 import api from '../utilities/axios/api';
-import { AccessState } from '../types/redux/AccessState';
 import { useAppDispatch } from '../redux/hooks';
-import { setAccess } from '../redux/access/accessSlice';
-import { setRefreshToken } from '../redux/refresh/refreshSlice';
+import { RefreshState } from '../types/redux/RefreshState';
+import { setAccessToken } from '../redux/access/accessSlice';
+import { setRefresh } from '../redux/refresh/refreshSlice';
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -38,13 +38,13 @@ function Login() {
 
     api.post('/auth/login', { ...loginValues })
       .then((res) => {
-        const LoggedInUser: AccessState = {
+        const LoggedInUser: RefreshState = {
           username: res.data.username,
-          accessToken: res.headers.authorization || null,
+          refreshToken: res.data.refreshToken,
         };
 
-        dispatch(setAccess(LoggedInUser));
-        dispatch(setRefreshToken(res.data.refreshToken));
+        dispatch(setAccessToken(res.headers.authorization || null));
+        dispatch(setRefresh(LoggedInUser));
         navigate('/');
       })
       .catch((err) => {

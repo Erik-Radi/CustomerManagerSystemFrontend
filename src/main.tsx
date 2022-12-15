@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import './index.css';
 import { persistor, store } from './redux/store';
+import Fallback from './components/shared/Fallback';
 
 const LoginPage = lazy(() => import('./pages/Login'));
 
@@ -13,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <PersistGate persistor={persistor}>
       <Provider store={store}>
-        <Suspense>
+        <Suspense fallback={<Fallback />}>
           <BrowserRouter>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
