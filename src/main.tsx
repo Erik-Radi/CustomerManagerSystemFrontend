@@ -7,8 +7,11 @@ import App from './App';
 import './index.css';
 import { persistor, store } from './redux/store';
 import Fallback from './components/shared/Fallback';
+import setupInterceptor from './utilities/axios/setupInterceptor';
 
 const LoginPage = lazy(() => import('./pages/Login'));
+
+setupInterceptor();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

@@ -24,8 +24,15 @@
           "props": true,
           "ignorePropertyModificationsFor": [
             "state",
-            "currentTarget"
+            "currentTarget",
+            "config"
           ]
-        }]
+        }],
+        "no-underscore-dangle" : [
+          "error",
+          {
+            "allow": ["_retry"]
+          }
+        ]
   }
 }
